@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BOLSA_EXAMENModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DATOS_PERSONALES">
+          <Key>
+            <PropertyRef Name="LLAVE_DATO_PERSONAL" />
+          </Key>
+          <Property Name="LLAVE_DATO_PERSONAL" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LLAVE_USUARIO" Type="bigint" />
+          <Property Name="NOMBRE" Type="nvarchar(max)" />
+          <Property Name="PATERNO" Type="nvarchar(max)" />
+          <Property Name="MATERNO" Type="nvarchar(max)" />
+          <Property Name="CIUDAD" Type="nvarchar(max)" />
+          <Property Name="CALLE" Type="nvarchar(max)" />
+          <Property Name="NUMERO" Type="nvarchar(max)" />
+          <Property Name="COLONIA" Type="nvarchar(max)" />
+          <Property Name="TELEFONO" Type="nvarchar(max)" />
+          <Property Name="OTRO_TEL" Type="nvarchar(max)" />
+          <Property Name="FECHA_NAC" Type="date" />
+          <Property Name="CURP" Type="nvarchar(max)" />
+          <Property Name="RFC" Type="nvarchar(max)" />
+          <Property Name="PASAPORTE" Type="nvarchar(max)" />
+          <Property Name="CARTILLA" Type="nvarchar(max)" />
+          <Property Name="GENERO" Type="nvarchar(max)" />
+          <Property Name="EDO_CIVIL" Type="nvarchar(max)" />
+          <Property Name="FECHA_ALTA" Type="datetime" />
+          <Property Name="MUN" Type="varchar(max)" />
+          <Property Name="EDO" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EXP_LABORAL">
+          <Key>
+            <PropertyRef Name="LLAVE_EXP_LAB" />
+          </Key>
+          <Property Name="LLAVE_EXP_LAB" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LLAVE_USUARIO" Type="bigint" />
+          <Property Name="PUESTO" Type="nvarchar(max)" />
+          <Property Name="FUNCIONES" Type="nvarchar(max)" />
+          <Property Name="EMPRESA" Type="nvarchar(max)" />
+          <Property Name="NO_EMPLEADOS" Type="int" />
+          <Property Name="FECHA_INICIO" Type="nvarchar(max)" />
+          <Property Name="FECHA_FIN" Type="nvarchar(max)" />
+          <Property Name="RET_MENS_BRUTA" Type="bigint" />
+          <Property Name="RET_MENS_NETA" Type="bigint" />
+          <Property Name="FECHA_ALTA" Type="date" />
+          <Property Name="PAIS" Type="nvarchar(max)" />
+          <Property Name="LLAVE_DATO_PERSONAL" Type="bigint" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="LLAVE_USUARIO" />
+          </Key>
+          <Property Name="LLAVE_USUARIO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USUARIO" Type="nvarchar" MaxLength="20" />
+          <Property Name="PASS" Type="nvarchar" MaxLength="20" />
+          <Property Name="EMAIL" Type="nvarchar(max)" />
+          <Property Name="FECHA_ALTA" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="BOLSA_EXAMENModelStoreContainer">
+          <EntitySet Name="DATOS_PERSONALES" EntityType="Self.DATOS_PERSONALES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXP_LABORAL" EntityType="Self.EXP_LABORAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BOLSA_EXAMENModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DATOS_PERSONALES">
+          <Key>
+            <PropertyRef Name="LLAVE_DATO_PERSONAL" />
+          </Key>
+          <Property Name="LLAVE_DATO_PERSONAL" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LLAVE_USUARIO" Type="Int64" />
+          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PATERNO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MATERNO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CIUDAD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CALLE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NUMERO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="COLONIA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OTRO_TEL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_NAC" Type="DateTime" Precision="0" />
+          <Property Name="CURP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RFC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PASAPORTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CARTILLA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GENERO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EDO_CIVIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_ALTA" Type="DateTime" Precision="3" />
+          <Property Name="MUN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EDO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EXP_LABORAL">
+          <Key>
+            <PropertyRef Name="LLAVE_EXP_LAB" />
+          </Key>
+          <Property Name="LLAVE_EXP_LAB" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LLAVE_USUARIO" Type="Int64" />
+          <Property Name="PUESTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FUNCIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EMPRESA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NO_EMPLEADOS" Type="Int32" />
+          <Property Name="FECHA_INICIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_FIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RET_MENS_BRUTA" Type="Int64" />
+          <Property Name="RET_MENS_NETA" Type="Int64" />
+          <Property Name="FECHA_ALTA" Type="DateTime" Precision="0" />
+          <Property Name="PAIS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LLAVE_DATO_PERSONAL" Type="Int64" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="LLAVE_USUARIO" />
+          </Key>
+          <Property Name="LLAVE_USUARIO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_ALTA" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="BOLSA_EXAMENEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DATOS_PERSONALES" EntityType="Self.DATOS_PERSONALES" />
+          <EntitySet Name="EXP_LABORAL" EntityType="Self.EXP_LABORAL" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BOLSA_EXAMENModelStoreContainer" CdmEntityContainer="BOLSA_EXAMENEntities">
+          <EntitySetMapping Name="DATOS_PERSONALES">
+            <EntityTypeMapping TypeName="BOLSA_EXAMENModel.DATOS_PERSONALES">
+              <MappingFragment StoreEntitySet="DATOS_PERSONALES">
+                <ScalarProperty Name="LLAVE_DATO_PERSONAL" ColumnName="LLAVE_DATO_PERSONAL" />
+                <ScalarProperty Name="LLAVE_USUARIO" ColumnName="LLAVE_USUARIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PATERNO" ColumnName="PATERNO" />
+                <ScalarProperty Name="MATERNO" ColumnName="MATERNO" />
+                <ScalarProperty Name="CIUDAD" ColumnName="CIUDAD" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="COLONIA" ColumnName="COLONIA" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="OTRO_TEL" ColumnName="OTRO_TEL" />
+                <ScalarProperty Name="FECHA_NAC" ColumnName="FECHA_NAC" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="PASAPORTE" ColumnName="PASAPORTE" />
+                <ScalarProperty Name="CARTILLA" ColumnName="CARTILLA" />
+                <ScalarProperty Name="GENERO" ColumnName="GENERO" />
+                <ScalarProperty Name="EDO_CIVIL" ColumnName="EDO_CIVIL" />
+                <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
+                <ScalarProperty Name="MUN" ColumnName="MUN" />
+                <ScalarProperty Name="EDO" ColumnName="EDO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXP_LABORAL">
+            <EntityTypeMapping TypeName="BOLSA_EXAMENModel.EXP_LABORAL">
+              <MappingFragment StoreEntitySet="EXP_LABORAL">
+                <ScalarProperty Name="LLAVE_EXP_LAB" ColumnName="LLAVE_EXP_LAB" />
+                <ScalarProperty Name="LLAVE_USUARIO" ColumnName="LLAVE_USUARIO" />
+                <ScalarProperty Name="PUESTO" ColumnName="PUESTO" />
+                <ScalarProperty Name="FUNCIONES" ColumnName="FUNCIONES" />
+                <ScalarProperty Name="EMPRESA" ColumnName="EMPRESA" />
+                <ScalarProperty Name="NO_EMPLEADOS" ColumnName="NO_EMPLEADOS" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="RET_MENS_BRUTA" ColumnName="RET_MENS_BRUTA" />
+                <ScalarProperty Name="RET_MENS_NETA" ColumnName="RET_MENS_NETA" />
+                <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
+                <ScalarProperty Name="PAIS" ColumnName="PAIS" />
+                <ScalarProperty Name="LLAVE_DATO_PERSONAL" ColumnName="LLAVE_DATO_PERSONAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="BOLSA_EXAMENModel.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="LLAVE_USUARIO" ColumnName="LLAVE_USUARIO" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
