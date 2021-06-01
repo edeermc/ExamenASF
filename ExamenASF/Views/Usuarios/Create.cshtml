@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Crear usuario";
+}
+
+<h2>Crear usuario</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "new-user" })) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Usuario</label>
+            <div class="col-md-10">
+                <input type="text" name="usuario" id="usuario" class="form-control" required/>
+                <span id="help_usuario" class="help-block hidden text-danger">El nombre de usuario debe tener mínimo 3 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Correo electrónico</label>
+            <div class="col-md-10">
+                <input type="email" name="correo" id="correo" class="form-control" required/>
+                <span id="help_correo" class="help-block hidden text-danger">Correo electrónico no válido</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Contraseña</label>
+            <div class="col-md-10">
+                <input type="password" name="contrasena" id="contrasena" class="form-control" required />
+                <span id="help_contrasena" class="help-block hidden text-danger">Contraseña demasiado corta, debe tener mínimo 6 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" id="saveForm" class="btn btn-success" />
+                <a href="/Usuarios" class="btn btn-danger"> Volver</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $('#saveForm').on('click', (e) => {
+            e.preventDefault();
+
+            let user = $('#new-user').serialize();
+            console.log(user);
+
+            $.ajax({
+                url: '/Usuarios/Create',
+                method: 'post',
+                data: user,
+                dataType: 'json',
+                beforeSend: () => {
+                    $('.bs-example-modal-sm').modal('show');
+                },
+                success: (data) => {
+                    alert(data);
+                    $('.bs-example-modal-sm').modal('hide');
+                },
+                error: () => {
+                    $('.bs-example-modal-sm').modal('hide');
+                }
+            });
+
+            return false;
+        })
+    </script>
+}

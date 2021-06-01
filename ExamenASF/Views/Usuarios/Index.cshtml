@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Usuarios";
+}
+
+<h2>Usuarios</h2>
+<legend></legend>
+<div class="text-right">
+    <a class="btn btn-primary" href="/Usuarios/Create">
+        <i class="glyphicon glyphicon-plus"></i> Agregar usuario
+    </a>
+</div>
+
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Correo electrónico</th>
+            <th>Fecha de alta</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model) {
+            <tr>
+                <td>
+                    @user.usuario
+                </td>
+                <td>
+                    @user.email
+                </td>
+                <td>
+                    @user.fechaAlta.Date.ToString("yyyy-MM-dd HH:mm:ss")
+                </td>
+                <td class="text-center">
+                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                        @Html.ActionLink("Datos personales", "Details", new { id = user.LlaveUsuario }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Experiencia", "Details", new { id = user.LlaveUsuario }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Editar", "Edit", new { id = user.LlaveUsuario }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = user.LlaveUsuario }, new { @class = "btn btn-danger" })
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
