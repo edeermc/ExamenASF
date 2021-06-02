@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Añadir experiencia laboral";
+}
+
+<h2>Añadir experiencia laboral</h2>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "user-exp" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="LlaveUsuario" value="@ViewBag.idUsuario" />
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Empresa</label>
+            <div class="col-md-10">
+                <input type="text" name="empresa" id="empresa" class="form-control" onblur="validate('empresa', 3);" required />
+                <span id="help_empresa" class="help-block hidden text-danger">Empresa debe tener mínimo 3 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Pais</label>
+            <div class="col-md-10">
+                <input type="text" name="pais" id="pais" class="form-control" onblur="validate('pais', 4);" required />
+                <span id="help_pais" class="help-block hidden text-danger">País debe tener mínimo 4 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Puesto</label>
+            <div class="col-md-10">
+                <input type="text" name="puesto" id="puesto" class="form-control" onblur="validate('puesto', 4);" required />
+                <span id="help_puesto" class="help-block hidden text-danger">Puesto debe tener mínimo 4 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Funciones</label>
+            <div class="col-md-10">
+                <textarea name="funciones" id="funciones" class="form-control" onblur="validate('funciones', 25);" rows="3" required></textarea>
+                <span id="help_funciones" class="help-block hidden text-danger">Funciones debe tener mínimo 25 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Fechas de trabajo </label>
+            <div class="col-md-3">
+                <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" required />
+            </div>
+
+            <label for="" class="control-label col-md-1">a </label>
+            <div class="col-md-3">
+                <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Ret mensual bruta</label>
+            <div class="col-md-10">
+                <input type="number" name="ret_men_bruta" id="ret_men_bruta" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Ret mensual neta</label>
+            <div class="col-md-10">
+                <input type="number" name="ret_men_neta" id="ret_men_neta" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Número de empleados'</label>
+            <div class="col-md-10">
+                <input type="number" name="num_empledos" id="num_empledos" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" id="saveForm" class="btn btn-success" />
+                <a href="/Experiencia/Usuario/@ViewBag.idUsuario" class="btn btn-danger" id="btnBack">
+                    <i class="glyphicon glyphicon-arrow-left"></i> Volver
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $('#user-exp').on('submit', (e) => {
+            e.preventDefault();
+            let exp = $('#user-exp').serialize();
+
+            $.ajax({
+                url: '/Experiencia/Create/@ViewBag.idUsuario',
+                method: 'post',
+                data: exp,
+                dataType: 'json',
+                beforeSend: () => {
+                    $('.bs-example-modal-sm').modal('show');
+                },
+                success: (data) => {
+                    $('.bs-example-modal-sm').modal('hide');
+
+                    if (data.status == 1) {
+                        window.location.href = '/Experiencia/Usuario/@ViewBag.idUsuario';
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: () => {
+                    alert('Algo ha salido mal, contacta con tu administrador del sistema');
+                    $('.bs-example-modal-sm').modal('hide');
+                }
+            });
+        })
+
+        const validate = (field, min_legth) => {
+            const input = $('#' + field);
+
+            if ((input.val()).length < min_legth) {
+                $('#help_' + field).removeClass('hidden');
+                input.parent().parent().addClass('has-error');
+                $('#saveForm').attr('disabled', 'disabled');
+
+            } else {
+                $('#help_' + field).addClass('hidden');
+                input.parent().parent().removeClass('has-error');
+                $('#saveForm').removeAttr('disabled');
+            }
+        }
+    </script>
+}

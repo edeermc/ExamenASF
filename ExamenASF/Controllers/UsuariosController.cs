@@ -34,7 +34,6 @@ namespace ExamenASF.Controllers {
         [HttpPost]
         public JsonResult Create(FormCollection collection) {
             try {
-                // TODO: Add insert logic here
                 USUARIOS newUser = new USUARIOS();
                 newUser.USUARIO = collection["usuario"];
                 newUser.EMAIL = collection["correo"];
@@ -53,7 +52,7 @@ namespace ExamenASF.Controllers {
                 con.SaveChanges();
                 con.Dispose();
 
-                var data = new { status = 1, msg = "Se han gauardado los cambios correctamente" };
+                var data = new { status = 1, msg = "Se han guardado los cambios correctamente" };
 
                 return Json(data, JsonRequestBehavior.AllowGet);
             } catch {
@@ -104,11 +103,11 @@ namespace ExamenASF.Controllers {
                 con.SaveChanges();
                 con.Dispose();
 
-                var data = new { status = 1, msg = "Se ha insertado el registro correctamente" };
+                var data = new { status = 1, msg = "Se ha actualizado el registro correctamente" };
 
                 return Json(data, JsonRequestBehavior.AllowGet);
             } catch (Exception e) {
-                var data = new { status = 0, msg = "Ha ocurrido un error al eliminar el registro sobre la BD, reportar con su administrador" };
+                var data = new { status = 0, msg = "Ha ocurrido un error al actualizar el registro sobre la BD, reportar con su administrador" };
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
@@ -117,7 +116,14 @@ namespace ExamenASF.Controllers {
         public JsonResult Delete(int id) {
             try {
                 BOLSA_EXAMENEntities con = new BOLSA_EXAMENEntities();
-
+                
+                var expLaboral = (from el in con.EXP_LABORAL
+                               where el.LLAVE_USUARIO == id
+                               select el).ToArray();
+                if (expLaboral.Length > 0) { 
+                    con.EXP_LABORAL.RemoveRange(expLaboral);
+                }
+                
                 var datosPersonales = (from dp in con.DATOS_PERSONALES
                                where dp.LLAVE_USUARIO == id
                                select dp).FirstOrDefault();
@@ -133,7 +139,7 @@ namespace ExamenASF.Controllers {
                 con.SaveChanges();
                 con.Dispose();
 
-                var data = new { status = 1, msg = "Se ha insertado el registro correctamente" };
+                var data = new { status = 1, msg = "Se ha eliminado el registro correctamente" };
 
                 return Json(data, JsonRequestBehavior.AllowGet);
             } catch {
@@ -244,10 +250,10 @@ namespace ExamenASF.Controllers {
                 DateTime fchNacimiento;
                 DateTime.TryParse(collection["fech_nac"], out fchNacimiento);
                 datosPersonales.FECHA_NAC = fchNacimiento;
-                datosPersonales.CURP = collection["curp"];
-                datosPersonales.RFC = collection["rfc"];
-                datosPersonales.PASAPORTE = collection["pasaporte"];
-                datosPersonales.CARTILLA = collection["cartilla"];
+                datosPersonales.CURP = collection["curp"].ToUpper();
+                datosPersonales.RFC = collection["rfc"].ToUpper();
+                datosPersonales.PASAPORTE = collection["pasaporte"].ToUpper();
+                datosPersonales.CARTILLA = collection["cartilla"].ToUpper();
                 datosPersonales.GENERO = collection["genero"];
                 datosPersonales.EDO_CIVIL = collection["edo_civil"];
                 datosPersonales.MUN = collection["municipio"];

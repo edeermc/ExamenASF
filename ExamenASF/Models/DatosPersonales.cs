@@ -16,7 +16,7 @@ namespace ExamenASF.Models {
         public string colonia { get; set; }
         public string telefono { get; set; }
         public string otroTel { get; set; }
-        public DateTime fechaNac { get; set; }
+        public Nullable<DateTime> fechaNac { get; set; }
         public string curp { get; set; }
         public string rfc { get; set; }
         public string pasaporte { get; set; }

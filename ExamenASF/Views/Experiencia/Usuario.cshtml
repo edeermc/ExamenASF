@@ -6,8 +6,14 @@
 <h2>Experiencia laboral: <b>@ViewBag.usuario.usuario</b></h2>
 
 <legend></legend>
-<div class="text-right">
-    <a class="btn btn-primary" href="/Usuarios/Create">
+<div class="col-md-6">
+    <a class="btn btn-danger" href="/Usuarios">
+        <i class="glyphicon glyphicon-arrow-left"></i> Volver
+    </a>
+</div>
+
+<div class="col-md-6 text-right">
+    <a class="btn btn-primary" href="/Experiencia/Create/@ViewBag.usuario.LlaveUsuario">
         <i class="glyphicon glyphicon-plus"></i> Agregar experiencia
     </a>
 </div>
@@ -36,10 +42,10 @@
                     @exp.puesto
                 </td>
                 <td>
-                    @exp.fechaInicio.Date.ToString("yyyy-MM-dd")
+                    @exp.fechaInicio
                 </td>
                 <td>
-                    @exp.fechaFin.Date.ToString("yyyy-MM-dd")
+                    @exp.fechaFin
                 </td>
                 <td class="text-center">
                     <div class="btn-group btn-group-xs" role="group" aria-label="...">
@@ -55,10 +61,10 @@
 @section scripts {
     <script>
         const deleteExp = (id) => {
-            if (confirm('Una vez eliminado el usuario no se podrá recuperar la información \n¿Desea continuar?')) {
+            if (confirm('Una vez eliminado la experiencia no se podrá recuperar la información \n¿Desea continuar?')) {
                 $.ajax({
                     url: '/Experiencia/Delete/' + id,
-                    method: 'get',
+                    method: 'post',
                     dataType: 'json',
                     beforeSend: () => {
                         $('.bs-example-modal-sm').modal('show');
@@ -67,7 +73,7 @@
                         $('.bs-example-modal-sm').modal('hide');
 
                         if (data.status == 1) {
-                            window.location.href = '/Usuarios';
+                            window.location.href = '/Experiencia/Usuario/@ViewBag.usuario.LlaveUsuario';
                         } else {
                             alert(data.msg);
                         }
