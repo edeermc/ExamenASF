@@ -36,7 +36,7 @@
                         @Html.ActionLink("Datos personales", "Details", new { id = user.LlaveUsuario }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Experiencia", "Details", new { id = user.LlaveUsuario }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Editar", "Edit", new { id = user.LlaveUsuario }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Eliminar", "Delete", new { id = user.LlaveUsuario }, new { @class = "btn btn-danger" })
+                        <button type="button" class="btn btn-danger" onclick="deleteUser(@user.LlaveUsuario);" >Eliminar</button>
                     </div>
                 </td>
             </tr>
@@ -44,3 +44,40 @@
     </tbody>
 </table>
 
+<div class="text-center col-md-4 col-md-offset-4">
+    <button class="btn btn-block btn-primary" id="printUsers" type="button">
+        <i class="glyphicon glyphicon-print"></i>
+        Imprimir usuarios
+    </button>
+</div>
+<div class="clearfix"></div>
+
+@section scripts {
+    <script>
+        const deleteUser = (id) => {
+            if (confirm('Una vez eliminado el usuario no se podrá recuperar la información \n¿Desea continuar?')) {
+                $.ajax({
+                    url: '/Usuarios/Delete/' + id,
+                    method: 'get',
+                    dataType: 'json',
+                    beforeSend: () => {
+                        $('.bs-example-modal-sm').modal('show');
+                    },
+                    success: (data) => {
+                        $('.bs-example-modal-sm').modal('hide');
+
+                        if (data.status == 1) {
+                            window.location.href = '/Usuarios';
+                        } else {
+                            alert(data.msg);
+                        }
+                    },
+                    error: () => {
+                        alert('Algo ha salido mal, contacta con tu administrador del sistema');
+                        $('.bs-example-modal-sm').modal('hide');
+                    }
+                });
+            }
+        };
+    </script>
+}

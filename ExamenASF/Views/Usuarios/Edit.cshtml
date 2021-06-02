@@ -1,17 +1,18 @@
 ﻿@{
-    ViewBag.Title = "Crear usuario";
+    ViewBag.Title = "Editar usuario";
 }
 
-<h2>Crear usuario</h2>
+<h2>Editar usuario: <b>@Model.usuario</b></h2>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "new-user" })) {
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "new-user" }))
+{
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <div class="form-group">
             <label for="" class="control-label col-md-2">Usuario</label>
             <div class="col-md-10">
-                <input type="text" name="usuario" id="usuario" class="form-control" onblur="validate('usuario', 3);" required/>
+                <input type="text" name="usuario" id="usuario" class="form-control" value="@Model.usuario" onblur="validate('usuario', 3);" required />
                 <span id="help_usuario" class="help-block hidden text-danger">El nombre de usuario debe tener mínimo 3 caracteres</span>
             </div>
         </div>
@@ -19,7 +20,7 @@
         <div class="form-group">
             <label for="" class="control-label col-md-2">Correo electrónico</label>
             <div class="col-md-10">
-                <input type="email" name="correo" id="correo" class="form-control" required/>
+                <input type="email" name="correo" id="correo" class="form-control" value="@Model.email" required />
                 <span id="help_correo" class="help-block hidden text-danger">Correo electrónico no válido</span>
             </div>
         </div>
@@ -27,7 +28,7 @@
         <div class="form-group">
             <label for="" class="control-label col-md-2">Contraseña</label>
             <div class="col-md-10">
-                <input type="password" name="contrasena" id="contrasena" class="form-control" onblur="validate('contrasena', 6);" required />
+                <input type="password" name="contrasena" id="contrasena" class="form-control" onblur="validate('contrasena', 6);" />
                 <span id="help_contrasena" class="help-block hidden text-danger">Contraseña demasiado corta, debe tener mínimo 6 caracteres</span>
             </div>
         </div>
@@ -50,7 +51,7 @@
             console.log(user);
 
             $.ajax({
-                url: '/Usuarios/Create',
+                url: '/Usuarios/Edit/@Model.LlaveUsuario',
                 method: 'post',
                 data: user,
                 dataType: 'json',
