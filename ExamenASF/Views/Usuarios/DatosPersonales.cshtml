@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "Datos personales";
+}
+
+<h2>Datos personales: <b>@ViewBag.usuario.usuario</b></h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "user-detail" })) {
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="LlaveDatoPersonal" value="@Model.LlaveDatoPersonal" />
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Nombre</label>
+            <div class="col-md-10">
+                <input type="text" name="nombre" id="nombre" class="form-control" value="@Model.nombre" onblur="validate('nombre', 3);" required />
+                <span id="help_nombre" class="help-block hidden text-danger">El nombre debe tener mínimo 3 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Apellidos</label>
+            <div class="col-md-5">
+                <input type="text" name="paterno" id="paterno" class="form-control" placeholder="Apellido paterno" value="@Model.paterno" onblur="validate('paterno', 3);" required />
+                <span id="help_paterno" class="help-block hidden text-danger">El apellido paterno debe tener mínimo 3 caracteres</span>
+            </div>
+            <div class="col-md-5">
+                <input type="text" name="materno" id="materno" class="form-control" placeholder="Apellido materno" value="@Model.materno" onblur="validate('materno', 3);" required />
+                <span id="help_materno" class="help-block hidden text-danger">El apellido materno debe tener mínimo 3 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Dirección</label>
+            <div class="col-md-3">
+                <input type="text" name="estado" id="estado" class="form-control" placeholder="Estado" value="@Model.edo" onblur="validate('estado', 6);" />
+                <span id="help_estado" class="help-block hidden text-danger">Estado debe tener mínimo 6 caracteres</span>
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="ciudad" id="ciudad" class="form-control" placeholder="Ciudad" value="@Model.ciudad" onblur="validate('ciudad', 4);" />
+                <span id="help_ciudad" class="help-block hidden text-danger">Ciudad debe tener mínimo 4 caracteres</span>
+            </div>
+            <div class="col-md-4">
+                <input type="text" name="municipio" id="municipio" class="form-control" placeholder="Municipio" value="@Model.mun" onblur="validate('municipio', 4);" />
+                <span id="help_correo" class="help-block hidden text-danger">Municipio debe tener mínimo 4 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2"></label>
+            <div class="col-md-5">
+                <input type="text" name="calle" id="calle" class="form-control" placeholder="Calle" value="@Model.calle" onblur="validate('calle', 3);" />
+                <span id="help_calle" class="help-block hidden text-danger">Calle debe tener mínimo 3 caracteres</span>
+            </div>
+            <div class="col-md-1">
+                <input type="number" name="numero" id="numero" class="form-control" placeholder="Número" value="@Model.numero" onblur="validate('numero', 1);" />
+                <span id="help_numero" class="help-block hidden text-danger">Numero debe tener mínimo 1 caracteres</span>
+            </div>
+            <div class="col-md-4">
+                <input type="text" name="colonia" id="colonia" class="form-control" placeholder="Colonia" value="@Model.colonia" onblur="validate('colonia', 4);" />
+                <span id="help_colonia" class="help-block hidden text-danger">Colonia debe tener mínimo 4 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Teléfono</label>
+            <div class="col-md-10">
+                <input type="tel" name="telefono" id="telefono" class="form-control" value="@Model.telefono" onblur="validate('telefono', 10);" />
+                <span id="help_telefono" class="help-block hidden text-danger">Teléfono debe tener mínimo 10 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Otro teléfono</label>
+            <div class="col-md-10">
+                <input type="tel" name="telefono2" id="telefono2" class="form-control" value="@Model.otroTel" onblur="validate('telefono2', 10);" />
+                <span id="help_telefono2" class="help-block hidden text-danger">Teléfono debe tener mínimo 10 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Fecha de nacimiento</label>
+            <div class="col-md-10">
+                <input type="date" name="fech_nac" id="fech_nac" class="form-control" value="@Model.fechaNac.Date.ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">CURP</label>
+            <div class="col-md-10">
+                <input type="text" name="curp" id="curp" class="form-control" style="text-transform: uppercase" value="@Model.curp" onblur="validate('curp', 17);" />
+                <span id="help_curp" class="help-block hidden text-danger">CURP debe tener mínimo 17 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">RFC</label>
+            <div class="col-md-10">
+                <input type="text" name="rfc" id="rfc" class="form-control" style="text-transform: uppercase" value="@Model.rfc" onblur="validate('rfc', 12);" />
+                <span id="help_rfc" class="help-block hidden text-danger">RFC debe tener mínimo 12 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Pasaporte</label>
+            <div class="col-md-10">
+                <input type="text" name="pasaporte" id="pasaporte" class="form-control" style="text-transform: uppercase" value="@Model.pasaporte" onblur="validate('pasaporte', 12);" />
+                <span id="help_pasaporte" class="help-block hidden text-danger">Pasaporte debe tener mínimo 12 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Cartilla</label>
+            <div class="col-md-10">
+                <input type="text" name="cartilla" id="cartilla" class="form-control" style="text-transform: uppercase" value="@Model.cartilla" onblur="validate('cartilla', 12);" />
+                <span id="help_cartilla" class="help-block hidden text-danger">Cartilla debe tener mínimo 12 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-2">Género</label>
+            <div class="col-md-4">
+                <select class="form-control" name="genero" id="genero">
+                    <option disabled @Html.Raw(Model.genero == null ? "selected" : "")>Seleccione una opcion</option>
+                    <option value="Masculino" @Html.Raw(Model.genero == "Masculino" ? "selected" : "")>Masculino</option>
+                    <option value="Femenino" @Html.Raw(Model.genero == "Femenino" ? "selected" : "")>Femenino</option>
+                </select>
+            </div>
+
+            <label for="" class="control-label col-md-2">Estado civil</label>
+            <div class="col-md-4">
+                <select class="form-control" name="edo_civil" id="edo_civil">
+                    <option disabled @Html.Raw(Model.edoCivil == null ? "selected" : "")>Seleccione una opcion</option>
+                    <option value="Soltero" @Html.Raw(Model.edoCivil == "Soltero" ? "selected" : "")>Soltero</option>
+                    <option value="Casado" @Html.Raw(Model.edoCivil == "Casado" ? "selected" : "")>Casado</option>
+                    <option value="Viudo" @Html.Raw(Model.edoCivil == "Viudo" ? "selected" : "")>Viudo</option>
+                    <option value="Divorciado" @Html.Raw(Model.edoCivil == "Divorciado" ? "selected" : "")>Divorciado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" id="saveForm" class="btn btn-success" />
+                <a href="/Usuarios" class="btn btn-danger" id="btnBack"> Volver</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $('#user-detail').on('submit', (e) => {
+            e.preventDefault();
+            let datosp = $('#user-detail').serialize();
+
+            $.ajax({
+                url: '/Usuarios/DatosPersonales/@Model.LlaveUsuario',
+                method: 'post',
+                data: datosp,
+                dataType: 'json',
+                beforeSend: () => {
+                    $('.bs-example-modal-sm').modal('show');
+                },
+                success: (data) => {
+                    $('.bs-example-modal-sm').modal('hide');
+
+                    if (data.status == 1) {
+                        window.location.href = '/Usuarios';
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: () => {
+                    alert('Algo ha salido mal, contacta con tu administrador del sistema');
+                    $('.bs-example-modal-sm').modal('hide');
+                }
+            });
+        })
+
+        const validate = (field, min_legth) => {
+            const input = $('#' + field);
+
+            if ((input.val()).length < min_legth) {
+                $('#help_' + field).removeClass('hidden');
+                input.parent().parent().addClass('has-error');
+                $('#saveForm').attr('disabled', 'disabled');
+
+            } else {
+                $('#help_' + field).addClass('hidden');
+                input.parent().parent().removeClass('has-error');
+                $('#saveForm').removeAttr('disabled');
+            }
+        }
+    </script>
+}

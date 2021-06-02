@@ -1,42 +1,50 @@
-﻿@{
-    ViewBag.Title = "Usuarios";
+﻿
+@{
+    ViewBag.Title = "Experiencia laboral";
 }
 
-<h2>Usuarios</h2>
+<h2>Experiencia laboral: <b>@ViewBag.usuario.usuario</b></h2>
+
 <legend></legend>
 <div class="text-right">
     <a class="btn btn-primary" href="/Usuarios/Create">
-        <i class="glyphicon glyphicon-plus"></i> Agregar usuario
+        <i class="glyphicon glyphicon-plus"></i> Agregar experiencia
     </a>
 </div>
 
 <table class="table table-condensed table-hover">
     <thead>
         <tr>
-            <th>Usuario</th>
-            <th>Correo electrónico</th>
-            <th>Fecha de alta</th>
+            <th>País</th>
+            <th>Empresa</th>
+            <th>Puesto</th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
             <th>Opciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Model) {
+        @foreach (var exp in Model) {
             <tr>
                 <td>
-                    @user.usuario
+                    @exp.pais
                 </td>
                 <td>
-                    @user.email
+                    @exp.empresa
                 </td>
                 <td>
-                    @user.fechaAlta.Date.ToString("yyyy-MM-dd HH:mm:ss")
+                    @exp.puesto
+                </td>
+                <td>
+                    @exp.fechaInicio.Date.ToString("yyyy-MM-dd")
+                </td>
+                <td>
+                    @exp.fechaFin.Date.ToString("yyyy-MM-dd")
                 </td>
                 <td class="text-center">
                     <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                        @Html.ActionLink("Datos personales", "DatosPersonales", new { id = user.LlaveUsuario }, new { @class = "btn btn-primary" })
-                        <a href="/Experiencia/Usuario/@user.LlaveUsuario" class="btn btn-primary">Experiencia</a>
-                        @Html.ActionLink("Editar", "Edit", new { id = user.LlaveUsuario }, new { @class = "btn btn-warning" })
-                        <button type="button" class="btn btn-danger" onclick="deleteUser(@user.LlaveUsuario);" >Eliminar</button>
+                        @Html.ActionLink("Editar", "Edit", new { id = exp.LlaveExpLab }, new { @class = "btn btn-warning" })
+                        <button type="button" class="btn btn-danger" onclick="deleteExp(@exp.LlaveExpLab);">Eliminar</button>
                     </div>
                 </td>
             </tr>
@@ -44,20 +52,12 @@
     </tbody>
 </table>
 
-<div class="text-center col-md-4 col-md-offset-4">
-    <button class="btn btn-block btn-primary" id="printUsers" type="button">
-        <i class="glyphicon glyphicon-print"></i>
-        Imprimir usuarios
-    </button>
-</div>
-<div class="clearfix"></div>
-
 @section scripts {
     <script>
-        const deleteUser = (id) => {
+        const deleteExp = (id) => {
             if (confirm('Una vez eliminado el usuario no se podrá recuperar la información \n¿Desea continuar?')) {
                 $.ajax({
-                    url: '/Usuarios/Delete/' + id,
+                    url: '/Experiencia/Delete/' + id,
                     method: 'get',
                     dataType: 'json',
                     beforeSend: () => {

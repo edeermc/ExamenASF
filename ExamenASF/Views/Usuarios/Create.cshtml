@@ -45,9 +45,7 @@
     <script>
         $('#new-user').on('submit', (e) => {
             e.preventDefault();
-
             let user = $('#new-user').serialize();
-            console.log(user);
 
             $.ajax({
                 url: '/Usuarios/Create',
